@@ -1,7 +1,9 @@
 .dice {
   margin: 20px auto;
   perspective: 1000px; /* Add perspective to container */
+  cursor: pointer;  
 }
+
 
 .dice-face {
   width: 60px;

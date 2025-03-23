@@ -1,5 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import '../ComponentStyles/pawn.css';
+import pawnImage from '../res/pawn.png'; // Make sure the path matches your file structure
 
 const Pawn = ({ coords, isHopping }) => {
   return (
@@ -7,9 +9,10 @@ const Pawn = ({ coords, isHopping }) => {
       className="pawn"
       style={{
         position: 'absolute',
-        fontSize: '2rem',
         zIndex: 10,
-        transform: 'translate(-50%, -50%)' // Center the pawn
+        transform: 'translate(-50%, -50%)', // Center the pawn
+        width: '40px',  // Set explicit width (adjust as needed)
+        height: '40px', // Set explicit height (adjust as needed)
       }}
       initial={false}
       animate={{
@@ -22,7 +25,14 @@ const Pawn = ({ coords, isHopping }) => {
       }}
     >
       {isHopping ? (
-        <motion.div
+        <motion.img
+          src={pawnImage}
+          alt="Pawn"
+          style={{
+            width: '100%',
+            height: '100%',
+            objectFit: 'contain'
+          }}
           animate={{ 
             y: [0, -50, 0], // More pronounced vertical motion
             scale: [1, 1.2, 1],
@@ -33,11 +43,17 @@ const Pawn = ({ coords, isHopping }) => {
             times: [0, 0.5, 1],
             ease: "easeInOut"
           }}
-        >
-          ♟️
-        </motion.div>
+        />
       ) : (
-        "♟️"
+        <img
+          src={pawnImage}
+          alt="Pawn"
+          style={{
+            width: '100%',
+            height: '100%',
+            objectFit: 'contain'
+          }}
+        />
       )}
     </motion.div>
   );
