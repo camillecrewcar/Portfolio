@@ -1,32 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import Pawn from './Pawn';
 
-const GameBoard = ({ position, prevPosition, onPositionChange }) => {
-  const topics = [
-    'Education',
-    'Experience',
-    'Skills',
-    'Projects',
-    'Interests',
-    'Hobbies',
-    'Certifications',
-    'Goals',
-    'Contact',
-    'About Me'
-  ];
-  const boardSize = topics.length;
+const GameBoard = ({ position, prevPosition, onPositionChange, topics }) => {
+  const boardSize = topics.length; // topics is now an array
   const radius = 250;
   const [currentPos, setCurrentPos] = useState(prevPosition);
   const [isHopping, setIsHopping] = useState(false);
   const [currentHop, setCurrentHop] = useState(null);
-  const [hoveredCell, setHoveredCell] = useState(null); // New state for hover
+  const [hoveredCell, setHoveredCell] = useState(null);
 
   const getPositionCoords = (pos) => {
-    const index = pos - 1;
+    const index = pos - 1; // Adjust for 1-based indexing
     const angle = (index / boardSize) * 2 * Math.PI;
     return {
       x: Math.cos(angle) * radius - (Math.cos(angle) * radius / 300),
-      y: Math.sin(angle) * radius - (Math.sin(angle) * radius / 20)
+      y: Math.sin(angle) * radius - (Math.sin(angle) * radius / 20),
     };
   };
 
@@ -81,7 +69,7 @@ const GameBoard = ({ position, prevPosition, onPositionChange }) => {
         position: 'relative',
         width: '500px',
         height: '500px',
-        margin: '0 auto'
+        margin: '0 auto',
       }}
     >
       <div
@@ -89,14 +77,14 @@ const GameBoard = ({ position, prevPosition, onPositionChange }) => {
           position: 'absolute',
           top: '50%',
           left: '50%',
-          transform: 'translate(-50%, -50%)'
+          transform: 'translate(-50%, -50%)',
         }}
       >
         {topics.map((topic, index) => {
           const angle = (index / boardSize) * 2 * Math.PI;
           const x = Math.cos(angle) * radius;
           const y = Math.sin(angle) * radius;
-          const fieldPosition = index + 1;
+          const fieldPosition = topic.id; // Use the original id (1-10) from topicsArray
           const isHovered = hoveredCell === fieldPosition;
 
           return (
@@ -108,14 +96,14 @@ const GameBoard = ({ position, prevPosition, onPositionChange }) => {
               onMouseLeave={() => setHoveredCell(null)}
               style={{
                 position: 'absolute',
-                transform: `translate(${x}px, ${y - (y / 5)}px)`,
+                transform: `translate(${x}px, ${y - y / 5}px)`,
                 width: isHovered ? '75px' : '65px',
-                height: isHovered ? '70px' :'60px',
+                height: isHovered ? '70px' : '60px',
                 borderRadius: '15px',
                 backgroundImage: 'url(../res/field.png)',
                 backgroundSize: 'cover',
                 backgroundPosition: 'center',
-                border: isHovered ? '3px solid rgba(220, 220, 220, 0.9)' :'3px solid #ffffff',
+                border: isHovered ? '3px solid rgba(220, 220, 220, 0.9)' : '3px solid #ffffff',
                 boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)',
                 display: 'flex',
                 alignItems: 'center',
@@ -127,18 +115,15 @@ const GameBoard = ({ position, prevPosition, onPositionChange }) => {
                 fontWeight: '500',
                 color: '#333333',
                 backgroundColor: isHovered ? 'rgba(220, 220, 220, 0.9)' : 'rgba(255, 255, 255, 0.9)',
-                transition: 'width 0.2s ease-in-out, height 0.2s ease-in-out', // Smooth transition
+                transition: 'width 0.2s ease-in-out, height 0.2s ease-in-out',
                 cursor: 'pointer',
               }}
             >
-              {topic}
+              {topic.name}
             </div>
           );
         })}
-        <Pawn
-          coords={getPositionCoords(currentPos)}
-          isHopping={currentHop === currentPos}
-        />
+        <Pawn coords={getPositionCoords(currentPos)} isHopping={currentHop === currentPos} />
       </div>
     </div>
   );

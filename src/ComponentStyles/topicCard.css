@@ -11,12 +11,15 @@
   .topic-card-image {
     position: relative; /* Make this the positioning context */
     height: 15rem;
+    display: flex;
+    justify-content: center;
   }
   
   .topic-image {
     height: 100%;
     background-size: cover; /* Replaces object-fit for background images */
     background-position: center;
+
   }
   
   .topic-card-overlay {
@@ -43,8 +46,9 @@
     margin-bottom: 10px;
     position: absolute;
     display: flex;
+    align-items: center;
     justify-content: center;
-    width: 100%;
+    width: 80%;
     top: 70%;
   }
   
