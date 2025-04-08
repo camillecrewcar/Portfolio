@@ -11,8 +11,7 @@ const Pawn = ({ coords, isHopping }) => {
         position: 'absolute',
         zIndex: 10,
         transform: 'translate(-50%, -50%)', // Center the pawn
-        width: '40px',  // Set explicit width (adjust as needed)
-        height: '40px', // Set explicit height (adjust as needed)
+
       }}
       initial={false}
       animate={{
