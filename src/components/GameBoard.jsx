@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import Pawn from './Pawn';
+import './GameBoard.css'; // Adjust the path as necessary
 
 const GameBoard = ({ position, prevPosition, onPositionChange, topics }) => {
   const boardSize = topics.length;
@@ -86,11 +87,11 @@ const GameBoard = ({ position, prevPosition, onPositionChange, topics }) => {
   // Get cell size based on screen width - slightly smaller to accommodate more spacing
   const getCellSize = (isHovered) => {
     if (windowWidth <= 480) {
-      return isHovered ? '42px' : '38px';
+      return isHovered ? '46px' : '42px';
     } else if (windowWidth <= 768) {
-      return isHovered ? '62px' : '58px';
+      return isHovered ? '68px' : '64px';
     } else {
-      return isHovered ? '72px' : '64px';
+      return isHovered ? '78px' : '70px';
     }
   };
 
@@ -104,8 +105,9 @@ const GameBoard = ({ position, prevPosition, onPositionChange, topics }) => {
   // Get board size based on screen width - INCREASED to accommodate larger radius
   const getBoardSize = () => {
     if (windowWidth <= 480) return '450px';
-    if (windowWidth <= 768) return '550px';
-    return '500px';
+    if (windowWidth <= 768) return '600px';
+    if (windowWidth <= 1024) return '650px';
+    return '700px';
   };
 
   // Responsively adjust padding - reduced to fit text better
@@ -130,7 +132,6 @@ const GameBoard = ({ position, prevPosition, onPositionChange, topics }) => {
         position: 'relative',
         width: getBoardSize(),
         height: getBoardSize(),
-        margin: '0 auto',
       }}
     >
       <div

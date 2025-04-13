@@ -1,60 +1,30 @@
-import React from 'react';
-import { motion } from 'framer-motion';
+import React, { useEffect, useState } from 'react';
 import '../ComponentStyles/pawn.css';
-import pawnImage from '../res/pawn.png'; // Make sure the path matches your file structure
+import pawnImage from '../res/pawn.png';
 
 const Pawn = ({ coords, isHopping }) => {
+  const [animation, setAnimation] = useState('');
+  
+  useEffect(() => {
+    if (isHopping) {
+      setAnimation('hop 0.4s ease');
+    } else {
+      setAnimation('');
+    }
+  }, [isHopping]);
+
   return (
-    <motion.div
+    <div
       className="pawn"
       style={{
-        position: 'absolute',
-        zIndex: 10,
-        transform: 'translate(-50%, -50%)', // Center the pawn
-
+        left: coords.x,
+        top: coords.y,
+        transform: 'translate(-50%, -50%)',
+        transition: 'left 0.4s ease, top 0.4s ease',
+        animation: animation,
+        zIndex: 100,
       }}
-      initial={false}
-      animate={{
-        x: coords.x,
-        y: coords.y
-      }}
-      transition={{
-        type: 'tween',
-        duration: 0.5
-      }}
-    >
-      {isHopping ? (
-        <motion.img
-          src={pawnImage}
-          alt="Pawn"
-          style={{
-            width: '100%',
-            height: '100%',
-            objectFit: 'contain'
-          }}
-          animate={{ 
-            y: [0, -50, 0], // More pronounced vertical motion
-            scale: [1, 1.2, 1],
-            rotate: [0, -10, 10, 0] // Slight rotation for a more dynamic jump
-          }}
-          transition={{
-            duration: 0.5,
-            times: [0, 0.5, 1],
-            ease: "easeInOut"
-          }}
-        />
-      ) : (
-        <img
-          src={pawnImage}
-          alt="Pawn"
-          style={{
-            width: '100%',
-            height: '100%',
-            objectFit: 'contain'
-          }}
-        />
-      )}
-    </motion.div>
+    />
   );
 };
 
