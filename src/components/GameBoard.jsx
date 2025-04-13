@@ -87,11 +87,11 @@ const GameBoard = ({ position, prevPosition, onPositionChange, topics }) => {
   // Get cell size based on screen width - slightly smaller to accommodate more spacing
   const getCellSize = (isHovered) => {
     if (windowWidth <= 480) {
-      return isHovered ? '46px' : '42px';
+      return isHovered ? '50px' : '46px';
     } else if (windowWidth <= 768) {
-      return isHovered ? '68px' : '64px';
+      return isHovered ? '72px' : '68px';
     } else {
-      return isHovered ? '78px' : '70px';
+      return isHovered ? '86px' : '78px';
     }
   };
 

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import GameBoard from './components/GameBoard';
 import Dice from './components/Dice';
@@ -10,6 +10,7 @@ const App = () => {
   const [prevPosition, setPrevPosition] = useState(1);
   const [rolling, setRolling] = useState(false);
   const [language, setLanguage] = useState('en'); // Default language is English
+  const topicSectionRef = useRef(null);
 
   const topicsInfoEn = {
     1: {
@@ -206,6 +207,13 @@ const App = () => {
     setPrevPosition(position);
     const newPosition = ((position - 1 + value) % 10) + 1;
     setPosition(newPosition);
+    
+    // Auto-scroll to topic section on mobile devices after dice roll
+    setTimeout(() => {
+      if (window.innerWidth <= 768 && topicSectionRef.current) {
+        topicSectionRef.current.scrollIntoView({ behavior: 'smooth' });
+      }
+    }, 700); // Delay to allow animations to complete
   };
   
   // Convert topicsInfo object to an array of topics with their original position keys
@@ -248,22 +256,19 @@ const App = () => {
           onClick={toggleLanguage} 
           style={{ 
             position: 'absolute', 
-            top: '20px', 
             right: '20px', 
             padding: '8px 16px',
-            background: '#ffffff',
             border: 'none',
-            borderRadius: '4px',
             cursor: 'pointer',
             fontWeight: 'bold',
-            zIndex: 10
+            backgroundColor: 'black',
           }}
         >
           {language === 'en' ? 'Polski 🇵🇱' : 'English 🇬🇧'}
         </button>
       </div>
       <h1 style={{ color: 'white', fontSize: '2.5rem'}}>
-        {language === 'en' ? "Hi, I'm Kamil Krukar" : "Cześć, jestem Kamil Krukar"}
+        {language === 'en' ? "Hi, I'm Kamil Krukar" : "Cześć, nazywam się Kamil Krukar"}
       </h1>
       <div className="main-container">
         <div className="game-container">
@@ -279,7 +284,7 @@ const App = () => {
             onClick={() => setRolling(true)}
           />
         </div>
-        <div className="topic-section">
+        <div className="topic-section" ref={topicSectionRef}>
           <h1 style={{ color: 'white' }} className="topic-heading">
             {topicsInfo[position].name}
           </h1>
