@@ -9,8 +9,9 @@ const App = () => {
   const [position, setPosition] = useState(1);
   const [prevPosition, setPrevPosition] = useState(1);
   const [rolling, setRolling] = useState(false);
+  const [language, setLanguage] = useState('en'); // Default language is English
 
-  const topicsInfo = {
+  const topicsInfoEn = {
     1: {
       name: 'Education',
       colors: ['#000000', '#D4A5A5'],
@@ -105,12 +106,108 @@ const App = () => {
     },
   };
 
+  const topicsInfoPl = {
+    1: {
+      name: 'Edukacja',
+      colors: ['#000000', '#D4A5A5'],
+      items: [
+        { title: 'Tytuł inżyniera informatyki', desc: 'Studiowałem z wielkim entuzjazmem na Uniwersytecie Rzeszowskim. Zdobyłem tam ważne umiejętności programistyczne i matematyczne. Jako starosta roku, aktywnie uczestnicząc w życiu akademickim uczelni, nabyłem nowe umiejętności miękkie. Z niecierpliwością czekam na kontynuację mojej akademickiej przygody w przyszłości.', imageSrc: 'https://picsum.photos/400/200?random=1' },
+        { title: 'Wykształcenie techniczne', desc: 'Ukończyłem technikum o profilu informatycznym w Zespole Szkół Technicznych nr 5 w Krośnie. Tam nabyłem podstawowe umiejętności programistyczne i sprzętowe. Korzystam z tej wiedzy codziennie, nie tylko pisząc programy, ale również samodzielnie rozwiązując problemy techniczne (nie tylko swoje).', imageSrc: 'https://picsum.photos/400/200?random=2' },
+      ],
+    },
+    2: {
+      name: 'Doświadczenie',
+      colors: ['#000000', '#6B7280'],
+      items: [
+        { title: 'Korepetytor', desc: 'Obecnie pracuję w GoStudent. Tutaj uczę dzieci i nastolatków w różnym wieku informatyki i matematyki. Wszystkie zajęcia odbywają się online.', imageSrc: 'https://picsum.photos/400/200?random=3' },
+        { title: 'Projekty uniwersyteckie', desc: 'Podczas studiów zdobyłem doświadczenie w planowaniu projektów, kodowaniu w językach takich jak Python i Java oraz korzystaniu z narzędzi takich jak Git i bazy danych. Poprawiłem również swoje umiejętności pracy zespołowej, komunikacji i rozwiązywania problemów podczas pracy nad projektami technicznymi.', imageSrc: 'https://picsum.photos/400/200?random=4' },
+      ],
+    },
+    3: {
+      name: 'Umiejętności',
+      colors: ['#000000', '#4A704A'],
+      items: [
+        { title: 'Html, CSS, JS, React, Bootstrap, Android', desc: 'Pracując z tymi technologiami, udoskonaliłem swoją zdolność do tworzenia dynamicznych i responsywnych interfejsów internetowych. Dodatkowo, moje doświadczenie z projektowaniem interfejsu użytkownika Androida wzmocniło moje umiejętności w tworzeniu przyjaznych dla użytkownika aplikacji mobilnych.', imageSrc: 'https://picsum.photos/400/200?random=5' },
+        { title: 'SQL, Laravel, PHP, Java, SpringBoot', desc: 'Zbudowałem solidne systemy backendowe i opanowałem zarządzanie bazami danych. Rozwinąłem skalowalne aplikacje serwerowe, koncentrując się na efektywnej funkcjonalności.', imageSrc: 'https://picsum.photos/400/200?random=8' },
+        { title: 'Tworzenie gier', desc: 'Niedawno rozpocząłem swoją przygodę w tej dziedzinie. Stworzyłem już kilka projektów przy użyciu silnika Unity i nadal kształcę się w tym obszarze.', imageSrc: 'https://picsum.photos/400/200?random=7' },
+        { title: 'Uczenie maszynowe', desc: 'Udało mi się również stworzyć kilka projektów opartych na uczeniu ze wzmocnieniem. Nieustannie poszerzam swoją wiedzę w tym zakresie.', imageSrc: 'https://picsum.photos/400/200?random=9' },
+        { title: 'Podstawy każdego popularnego języka programowania', desc: 'Ponieważ od wielu lat uczę się i uczę innych kodowania, znam podstawy każdego popularnego języka programowania. Mogę szybko zdobyć niezbędną wiedzę do rozwiązania problemu i nauczyć się zupełnie nowej technologii od podstaw.', imageSrc: 'https://picsum.photos/400/200?random=10' },
+      ],
+    },
+    4: {
+      name: 'Projekty',
+      colors: ['#000000', '#D97706'],
+      items: [
+        { title: 'Forum o muzeach i zabytchach', desc: "Ten projekt to klasyczne forum w frameworku Laravel o muzeach i zabytkach z systemem polubień/nielubień. Oferuje również możliwość dodawania zabytków i muzeów, ich zdjęć, oceniania i komentowania dodanych obiektów, a także opcję wyszukiwania miejsca według nazwy lub lokalizacji, np. zabytków w pobliżu miasta Kraków.", imageSrc: 'https://picsum.photos/400/200?random=7' },
+        { title: 'Kółko i krzyżyk', desc: "Projekt jest implementacją gry w kółko i krzyżyk, gdzie można umieścić tylko trzy symbole (X lub O), a następnie gra przebiega poprzez przesuwanie umieszczonych symboli pionowo lub poziomo. Gra zawiera opcję gry przeciwko komputerowi, gdzie algorytm wirtualnego gracza to minimax z przycinaniem alfa-beta.", imageSrc: 'https://picsum.photos/400/200?random=8' },
+        { title: 'Klon Jiry, ale dla architektów', desc: "Ten projekt to aplikacja internetowa opracowana przy użyciu Spring Boot, z opcją instalacji wersji desktopowej (zbudowanej przy użyciu Electrona). Aplikacja służy jako system zarządzania zadaniami dla firm architektonicznych, obsługujący zarówno małe, jak i duże zadania. Po wypełnieniu odpowiedniego formularza użytkownicy mogą również generować różne rodzaje raportów PDF.", imageSrc: 'https://picsum.photos/400/200?random=8' },
+      ],
+    },
+    5: {
+      name: 'Projekt inżynierski',
+      colors: ['#000000', '#9370DB'],
+      items: [
+        { title: 'Pomysł na grę', desc: 'Wspólnie z moją dziewczyną opracowaliśmy zasady niedeterministycznej strategicznej gry planszowej skoncentrowanej na rywalizacji i zawierającej elementy manipulacji planszą. Po stworzeniu fizycznej kopii gry, testowaliśmy i udoskonalaliśmy zasady, aby poprawić rozgrywkę, aż osiągnęliśmy satysfakcjonujący wynik.', imageSrc: 'https://picsum.photos/400/200?random=9' },
+        { title: 'Implementacja gry', desc: "Kolejnym krokiem było zaimplementowanie gry planszowej w środowisku Unity. Zostało to zrobione w sposób intuicyjny nawet dla początkującego gracza.", imageSrc: 'https://picsum.photos/400/200?random=10' },
+        { title: 'Tworzenie wirtualnego gracza', desc: "Ostatnią częścią projektu inżynierskiego było stworzenie agenta, który gra jak najefektywniej, umożliwiając tryb gracz kontra komputer. Osiągnąłem to, stosując uczenie ze wzmocnieniem przy użyciu biblioteki ML-Agents.", imageSrc: 'https://picsum.photos/400/200?random=1' },
+      ],
+    },
+    6: {
+      name: 'Języki',
+      colors: ['#000000', '#D2B48C'],
+      items: [
+        { title: 'Angielski', desc: 'Zawsze czytam dokumentację, piszę zapytania i szukam informacji po angielsku. Potrafię również płynnie mówić i pisać w tym języku.', imageSrc: 'https://picsum.photos/400/200?random=11' },
+        { title: 'Polski', desc: 'Mój język ojczysty.', imageSrc: 'https://picsum.photos/400/200?random=12' },
+        { title: 'Rosyjski', desc: 'Potrafię czytać alfabet rosyjski i rozumiem większość pisanych i mówionych zdań.', imageSrc: 'https://picsum.photos/400/200?random=1' },
+        { title: 'Włoski', desc: "To język, którego obecnie skupiam się na nauce. Rozumiem jego większość i pracuję nad płynnym mówieniem.", imageSrc: 'https://picsum.photos/400/200?random=2' },
+      ],
+    },
+    7: {
+      name: 'Large language models',
+      colors: ['#000000', '#4682B4'],
+      items: [
+        { title: 'Moje podejście do LLM', desc: "Ponieważ nauczyłem się programować na długo przed powstaniem tych modeli, nauczyłem się dobrze kodować używając tylko wiedzy, internetu i dokumentacji. Używam tych technologii, aby przyspieszyć proces pisania kodu.", imageSrc: 'https://picsum.photos/400/200?random=13' },
+        { title: 'Modele, których używam', desc: 'Korzystam z szerokiej gamy modeli. Jeśli chodzi o programowanie, staram się nadążać za innowacjami technologicznymi i używać tych, które najlepiej rozwiązują problemy związane z kodem. (Grok, ChatGPT, Gemini, Claude AI, Copilot)', imageSrc: 'https://picsum.photos/400/200?random=14' },
+      ],
+    },
+    8: {
+      name: 'Cele',
+      colors: ['#000000', '#CD5C5C'],
+      items: [
+        { title: 'Kariera', desc: 'Wykorzystując nowo nabytą wiedzę i umiejętności, chcę się rozwijać i realizować ciekawe projekty w zaangażowanym zespole.', imageSrc: 'https://picsum.photos/400/200?random=15' },
+        { title: 'Osobiste', desc: 'Obecnie piszę indywidualne projekty, uczę się języka włoskiego i rozwijam się, aby stać się lepszym nauczycielem.', imageSrc: 'https://picsum.photos/400/200?random=16' },
+      ],
+    },
+    9: {
+      name: 'Kontakt',
+      colors: ['#000000', '#5F9EA0'],
+      items: [
+        { title: 'Email', desc: 'kamil.krukar999@gmail.com', imageSrc: 'https://picsum.photos/400/200?random=17' },
+        { title: 'Numer telefonu', desc: '+48 530 552 656', imageSrc: 'https://picsum.photos/400/200?random=18' },
+      ],
+    },
+    10: {
+      name: 'O mnie',
+      colors: ['#000000', '#BDB76B'],
+      items: [
+        { title: 'Kilka słów o mnie', desc: 'Jestem inżynierem z Polski, kocham kodowanie, matematykę i gry logiczne. Obecnie pracuję jako korepetytor online, ucząc informatyki i matematyki. Oprócz tego skupiam się na rozwoju osobistym i realizacji swoich pasji.', imageSrc: 'https://picsum.photos/400/200?random=19' },
+        { title: 'Gry planszowe', desc: 'Mam dość pokaźną kolekcję gier planszowych, co jest moim ulubionym sposobem spędzania czasu ze znajomymi. Wraz z moją dziewczyną pracujemy nad zasadami i publikacją naszej własnej gry planszowej.', imageSrc: 'https://picsum.photos/400/200?random=20' },
+        { title: 'Sport', desc: 'Moim największym osiągnięciem jest przebiegnięcie maratonu. Obecnie nie biegam zbyt często, ale staram się ćwiczyć, aby utrzymać formę.', imageSrc: 'https://picsum.photos/400/200?random=22' },
+        { title: 'Ekonomia', desc: 'Interesuję się zjawiskami makroekonomicznymi, systemami ekonomicznymi i historią pieniądza.', imageSrc: 'https://picsum.photos/400/200?random=12' },
+      ],
+    },
+  };
+
+  // Choose the topics info based on language
+  const topicsInfo = language === 'en' ? topicsInfoEn : topicsInfoPl;
+
   const handleRollComplete = (value) => {
     setRolling(false);
     setPrevPosition(position);
     const newPosition = ((position - 1 + value) % 10) + 1;
     setPosition(newPosition);
   };
+  
   // Convert topicsInfo object to an array of topics with their original position keys
   const topicsArray = Object.keys(topicsInfo).map((key) => ({
     id: Number(key), // Preserve the original key (1-10)
@@ -120,6 +217,10 @@ const App = () => {
   const handlePositionChange = (newPosition) => {
     setPrevPosition(position);
     setPosition(newPosition);
+  };
+
+  const toggleLanguage = () => {
+    setLanguage(language === 'en' ? 'pl' : 'en');
   };
 
   const backgroundStyle = {
@@ -142,7 +243,28 @@ const App = () => {
         ease: 'easeInOut',
       }}
     >
-      <h1 style={{ color: 'white', fontSize: '2.5rem'}}>Hi, I'm Kamil Krukar</h1>
+      <div className="language-toggle">
+        <button 
+          onClick={toggleLanguage} 
+          style={{ 
+            position: 'absolute', 
+            top: '20px', 
+            right: '20px', 
+            padding: '8px 16px',
+            background: '#ffffff',
+            border: 'none',
+            borderRadius: '4px',
+            cursor: 'pointer',
+            fontWeight: 'bold',
+            zIndex: 10
+          }}
+        >
+          {language === 'en' ? 'Polski 🇵🇱' : 'English 🇬🇧'}
+        </button>
+      </div>
+      <h1 style={{ color: 'white', fontSize: '2.5rem'}}>
+        {language === 'en' ? "Hi, I'm Kamil Krukar" : "Cześć, jestem Kamil Krukar"}
+      </h1>
       <div className="main-container">
         <div className="game-container">
           <GameBoard

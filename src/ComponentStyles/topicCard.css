@@ -41,7 +41,7 @@
   }
   
   .topic-card-title {
-    font-size: 1.5rem;
+    font-size: 1.3rem;
     font-weight: 700;
     margin-bottom: 10px;
     position: absolute;
@@ -57,4 +57,53 @@
     font-weight: 400;
     line-height: 1.5;
     text-align: left;
+  }
+  
+  /* Responsive styles */
+  @media screen and (max-width: 1200px) {
+    .topic-card {
+      width: 22rem;
+    }
+    
+    .topic-card-image {
+      height: 13rem;
+    }
+  }
+  
+  @media screen and (max-width: 768px) {
+    .topic-card {
+      width: 18rem;
+    }
+    
+    .topic-card-image {
+      height: 12rem;
+    }
+    
+    .topic-card-title {
+      font-size: 1.1rem;
+    }
+    
+    .topic-card-desc {
+      font-size: 0.9rem;
+    }
+  }
+  
+  @media screen and (max-width: 480px) {
+    .topic-card {
+      width: 90%;
+      max-width: 16rem;
+    }
+    
+    .topic-card-image {
+      height: 10rem;
+    }
+    
+    .topic-card-title {
+      font-size: 1rem;
+      top: 65%;
+    }
+    
+    .topic-card-content {
+      padding: 15px;
+    }
   }

@@ -12,8 +12,9 @@ const TopicCard = ({ name, desc, imageSrc }) => {
         <div className="topic-card-overlay"></div>
         <img
           src={imageSource}
-          alt="Topic"
+          alt={name || "Topic"}
           className="topic-image"
+          loading="lazy"
         />
         <h2 className="topic-card-title">{name}</h2>
       </div>
