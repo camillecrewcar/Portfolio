@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import GameBoard from './components/GameBoard';
 import Dice from './components/Dice';
 import TopicCard from './components/TopicCard';
+import ComputerScienceIcon from './res/ComputerScience.jpg'; // Import your icon here
 import './App.css';
 
 const App = () => {
@@ -17,7 +18,7 @@ const App = () => {
       name: 'Education',
       colors: ['#000000', '#D4A5A5'],
       items: [
-        { title: 'Engineering degree in Computer Science', desc: 'I studied with great enthusiasm at the University of Rzeszów. I learned important programming and mathematical skills here. As a year prefect, actively participating in the academic life of the university I acquired new soft skills. I look forward to continue my academic adventure in the future.', imageSrc: 'https://picsum.photos/400/200?random=1' },
+        { title: 'Engineering degree in Computer Science', desc: 'I studied with great enthusiasm at the University of Rzeszów. I learned important programming and mathematical skills here. As a year prefect, actively participating in the academic life of the university I acquired new soft skills. I look forward to continue my academic adventure in the future.', imageSrc: ComputerScienceIcon },
         { title: 'technical school degree', desc: 'I completed an electrical technical school with a focus on IT at Technical School No. 5 in Krosno. There, I acquired basic programming and hardware skills. I use this knowledge daily, not only by writing programs but also by independently solving technical problems (not just my own).', imageSrc: 'https://picsum.photos/400/200?random=2' },
       ],
     },
