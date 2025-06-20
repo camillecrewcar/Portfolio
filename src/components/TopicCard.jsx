@@ -7,14 +7,31 @@ const TopicCard = ({ name, desc, imageSrc }) => {
   const imageSource = imageSrc || 'https://picsum.photos/400/200';
 
   return (
-    <div className="topic-card">
-      <div className="topic-card-image">
+    <div
+      className="topic-card"
+      style={{
+        transition: 'transform 0.25s cubic-bezier(.4,2,.6,1)',
+      }}
+      onMouseEnter={e => e.currentTarget.style.transform = 'scale(1.04)'}
+      onMouseLeave={e => e.currentTarget.style.transform = 'scale(1)'}
+    >
+      <div className="topic-card-image" style={{ aspectRatio: '2 / 1', width: '100%', overflow: 'hidden', display: 'flex', alignItems: 'center', justifyContent: 'center', background: '#222' }}>
         <div className="topic-card-overlay"></div>
         <img
           src={imageSource}
           alt={name || "Topic"}
           className="topic-image"
           loading="lazy"
+          style={{
+            width: '100%',
+            height: '100%',
+            objectFit: 'cover',
+            objectPosition: 'center',
+            display: 'block',
+            maxWidth: '100%',
+            maxHeight: '100%',
+            borderRadius: '8px'
+          }}
         />
         <h2 className="topic-card-title">{name}</h2>
       </div>
