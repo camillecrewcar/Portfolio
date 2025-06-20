@@ -15,7 +15,7 @@ const TopicCard = ({ name, desc, imageSrc }) => {
       onMouseEnter={e => e.currentTarget.style.transform = 'scale(1.04)'}
       onMouseLeave={e => e.currentTarget.style.transform = 'scale(1)'}
     >
-      <div className="topic-card-image" style={{ aspectRatio: '2 / 1', width: '100%', overflow: 'hidden', display: 'flex', alignItems: 'center', justifyContent: 'center', background: '#222' }}>
+      <div className="topic-card-image" style={{ aspectRatio: '2 / 1', width: '100%', overflow: 'hidden', display: 'flex', alignItems: 'center', justifyContent: 'center', background: '#222', position: 'relative' }}>
         <div className="topic-card-overlay"></div>
         <img
           src={imageSource}
@@ -33,7 +33,30 @@ const TopicCard = ({ name, desc, imageSrc }) => {
             borderRadius: '8px'
           }}
         />
-        <h2 className="topic-card-title">{name}</h2>
+        <h2
+          className="topic-card-title"
+          style={{
+            position: 'absolute',
+            left: '50%',
+            bottom: 8,
+            transform: 'translateX(-50%)',
+            margin: 0,
+            padding: '4px 8px',
+            color: 'white',
+            background: 'rgba(0,0,0,0.55)',
+            borderRadius: '6px',
+            fontSize: '1.1rem',
+            fontWeight: 600,
+            whiteSpace: 'normal',
+            overflow: 'visible',
+            textOverflow: 'unset',
+            zIndex: 2,
+            maxWidth: 'calc(100% - 24px)',
+            lineHeight: 1.3
+          }}
+        >
+          {name}
+        </h2>
       </div>
       <div className="topic-card-content">
         <p className="topic-card-desc">{desc}</p>

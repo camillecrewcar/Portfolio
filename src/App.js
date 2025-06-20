@@ -82,7 +82,7 @@ const App = () => {
       name: 'The engineering project',
       colors: ['#000000', '#9370DB'],
       items: [
-        { title: 'The game idea', desc: 'Love strategy Together with my girlfriend, we devised the rules for a nondeterministic strategic board game focused on competition and featuring elements of board manipulation. After creating a physical copy of the game, we tested and refined the rules to improve gameplay until we achieved a satisfying result.', imageSrc: GameIdeaIcon },
+        { title: 'The game idea', desc: 'Together with my girlfriend, we devised the rules for a nondeterministic strategic board game focused on competition and featuring elements of board manipulation. After creating a physical copy of the game, we tested and refined the rules to improve gameplay until we achieved a satisfying result.', imageSrc: GameIdeaIcon },
         { title: 'Implementing game', desc: "The next step was to implement the board game in the Unity environment. This was done in a way that is intuitive even for a beginner player.", imageSrc: ImplementingGameIcon },
         { title: 'Creating virtual player', desc: "The final part of the engineering project was to create an agent that plays as effectively as possible, enabling a player-versus-computer mode. I accomplished this by applying reinforcement learning using the ML-Agents library.", imageSrc: VirtualPlayerIcon },
       ],
@@ -91,7 +91,7 @@ const App = () => {
       name: 'Languages',
       colors: ['#000000', '#D2B48C'],
       items: [
-        { title: 'English', desc: 'Enjoy nature I always read documentation, write prompts, and search for information in English. I can also fluently speak and write in this language.', imageSrc: EnglishIcon },
+        { title: 'English', desc: 'I always read documentation, write prompts, and search for information in English. I can also fluently speak and write in this language.', imageSrc: EnglishIcon },
         { title: 'Polish', desc: 'My native language.', imageSrc: PolishIcon },
         { title: 'Russian', desc: 'I can read the Russian alphabet and understand most written and spoken sentences.', imageSrc: RussianIcon },
         { title: 'Italian', desc: "It's a language I'm currently focused on learning. I understand most of it, and I'm working on learning how to speak it fluently.", imageSrc: ItalianIcon },
@@ -294,7 +294,7 @@ const App = () => {
           {language === 'en' ? 'Polski 🇵🇱' : 'English 🇬🇧'}
         </button>
       </div>
-      <h1 style={{ color: 'white', fontSize: '2.5rem'}}>
+      <h1 style={{ color: 'white', fontSize: '3rem'}}>
         {language === 'en' ? "Hi, I'm Kamil Krukar" : "Cześć, nazywam się Kamil Krukar"}
       </h1>
       <div className="main-container">
