@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
 import Pawn from './Pawn';
-import './GameBoard.css'; // Adjust the path as necessary
 
 const GameBoard = ({ position, prevPosition, onPositionChange, topics }) => {
   const boardSize = topics.length;
@@ -130,7 +129,7 @@ const GameBoard = ({ position, prevPosition, onPositionChange, topics }) => {
       className="game-board"
       style={{
         position: 'relative',
-        width: getBoardSize(),
+        width: getBoardSize() - 80,
         height: getBoardSize(),
       }}
     >

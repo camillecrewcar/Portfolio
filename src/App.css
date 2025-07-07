@@ -8,7 +8,6 @@
 
 .game-board {
   display: flex;
-  width: 500px;
   height: 500px;
 }
 
@@ -49,12 +48,6 @@ button:disabled {
   max-width: 400px;
   margin-left: auto;
   margin-right: auto;
-}
-
-.game-board {
-  display: flex;
-  width: 500px;
-  height: 500px;
 }
 
 /* App.css */
