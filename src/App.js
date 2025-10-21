@@ -32,6 +32,8 @@ import BackgroundIcon from './res/aboutMe.png';
 import BoardGamesIcon from './res/boardgames.png';
 import WorkingOutIcon from './res/sport.png';
 import EconomicsIcon from './res/economics.png';
+import AIcert from './res/AIcert.jpg';
+import DK from './res/DK.png';
 import './App.css';
 
 const App = () => {
@@ -47,6 +49,8 @@ const App = () => {
       colors: ['#000000', '#D4A5A5'],
       items: [
         { title: 'Engineering degree in Computer Science', desc: 'I studied with great enthusiasm at the University of Rzeszów. I learned important programming and mathematical skills here. As a year prefect, actively participating in the academic life of the university I acquired new soft skills. I look forward to continue my academic adventure in the future.', imageSrc: ComputerScienceIcon },
+        { title: 'AI in business development', desc: 'In this course created by Google and SGH, I gained practical skills in data analysis, process automation, and AI/ML integration in business environments. The training focused on developing future-oriented competencies relevant to the IT and fintech sectors.', imageSrc: AIcert },
+        { title: 'Ecomomics, my current academic field of study', desc: 'Studying economics has equipped me with a strong understanding of market dynamics, data-driven decision-making, and business strategy. This background enables me to analyze trends, evaluate performance, and contribute to effective business planning and growth.', imageSrc: EconomicsIcon },
         { title: 'technical school degree', desc: 'I completed an electrical technical school with a focus on IT at Technical School No. 5 in Krosno. There, I acquired basic programming and hardware skills. I use this knowledge daily, not only by writing programs but also by independently solving technical problems (not just my own).', imageSrc: TechnicalSchoolIcon },
       ],
     },
@@ -54,10 +58,24 @@ const App = () => {
       name: 'Experience',
       colors: ['#000000', '#6B7280'],
       items: [
-        { title: 'Tutor', desc: 'I currently work at GoStudent. Here, I teach children and teenagers of various ages computer science and mathematics. All classes take place online.', imageSrc: TutorIcon },
-        { title: 'University projects', desc: 'During my studies, I gained experience in project planning, coding in languages like Python and Java, and using tools like Git and databases. I also improved my teamwork, communication, and problem-solving skills while working on technical projects.', imageSrc: UniversityProjectsIcon },
+        { 
+          title: 'Tutor – Dobre Korepetycje', 
+          desc: 'I currently work at Dobre Korepetycje, teaching computer science and mathematics online to primary and secondary school students. I prepare individual learning materials and adjust the pace and difficulty to the needs of each student, combining technical knowledge with effective teaching skills.', 
+          imageSrc: DK 
+        },
+        { 
+          title: 'Tutor – GoStudent', 
+          desc: 'I worked for two years at GoStudent, teaching computer science and mathematics to students from Poland and abroad. I gained experience in online teaching, adapting to different learning styles, and tailoring content to the age and level of the students.', 
+          imageSrc: TutorIcon 
+        },
+        { 
+          title: 'University projects', 
+          desc: 'During my studies, I gained experience in project planning, coding in languages such as Python and Java, and using tools like Git and databases. I also improved my teamwork, communication, and problem-solving skills while working on technical projects.', 
+          imageSrc: UniversityProjectsIcon 
+        },
       ],
     },
+
     3: {
       name: 'Skills',
       colors: ['#000000', '#4A704A'],
@@ -139,6 +157,9 @@ const App = () => {
       colors: ['#000000', '#D4A5A5'],
       items: [
         { title: 'Tytuł inżyniera informatyki', desc: 'Studiowałem z wielkim entuzjazmem na Uniwersytecie Rzeszowskim. Zdobyłem tam ważne umiejętności programistyczne i matematyczne. Jako starosta roku, aktywnie uczestnicząc w życiu akademickim uczelni, nabyłem nowe umiejętności miękkie. Z niecierpliwością czekam na kontynuację mojej akademickiej przygody w przyszłości.', imageSrc: ComputerScienceIcon },
+        { title: 'Umiejętności jutra', desc: 'W tym kursie organizowanym przez Google i SGH, zdobyłem praktyczne umiejętności w zakresie analizy danych, automatyzacji procesów i integracji rozwiązań AI/ML w środowisku biznesowym. Szkolenie koncentrowało się na rozwijaniu kompetencji przyszłości istotnych w branżach IT i fintech.', imageSrc: AIcert },        
+
+        { title: 'Ekonomia (studia w trakcie)', desc: 'Studiowanie ekonomii wyposażyło mnie w solidne zrozumienie mechanizmów rynkowych, podejmowania decyzji opartych na danych oraz strategii biznesowej. Dzięki temu potrafię analizować trendy, oceniać wyniki i skutecznie wspierać planowanie oraz rozwój biznesu.', imageSrc: EconomicsIcon },        
         { title: 'Wykształcenie techniczne', desc: 'Ukończyłem technikum o profilu informatycznym w Zespole Szkół Technicznych nr 5 w Krośnie. Tam nabyłem podstawowe umiejętności programistyczne i sprzętowe. Korzystam z tej wiedzy codziennie, nie tylko pisząc programy, ale również samodzielnie rozwiązując problemy techniczne (nie tylko swoje).', imageSrc: TechnicalSchoolIcon },
       ],
     },
@@ -146,10 +167,24 @@ const App = () => {
       name: 'Doświadczenie',
       colors: ['#000000', '#6B7280'],
       items: [
-        { title: 'Korepetytor', desc: 'Obecnie pracuję w GoStudent. Tutaj uczę dzieci i nastolatków w różnym wieku informatyki i matematyki. Wszystkie zajęcia odbywają się online.', imageSrc: TutorIcon },
-        { title: 'Projekty uniwersyteckie', desc: 'Podczas studiów zdobyłem doświadczenie w planowaniu projektów, kodowaniu w językach takich jak Python i Java oraz korzystaniu z narzędzi takich jak Git i bazy danych. Poprawiłem również swoje umiejętności pracy zespołowej, komunikacji i rozwiązywania problemów podczas pracy nad projektami technicznymi.', imageSrc: UniversityProjectsIcon },
+        { 
+          title: 'Korepetytor – Dobre Korepetycje', 
+          desc: 'Obecnie pracuję w firmie Dobre Korepetycje, gdzie prowadzę zajęcia online z informatyki i matematyki dla uczniów szkół podstawowych i średnich. Przygotowuję indywidualne materiały dydaktyczne, dostosowując tempo nauki i poziom trudności do potrzeb uczniów. Praca ta pozwala mi łączyć wiedzę techniczną z umiejętnością przekazywania wiedzy w przystępny sposób.', 
+          imageSrc: DK 
+        },
+        { 
+          title: 'Korepetytor – GoStudent', 
+          desc: 'Przez dwa lata pracowałem w platformie edukacyjnej GoStudent, prowadząc zajęcia z informatyki i matematyki dla uczniów z Polski i zagranicy. Zdobyłem doświadczenie w nauczaniu online, pracy z różnymi stylami uczenia się oraz w dostosowywaniu treści do wieku i poziomu uczniów.', 
+          imageSrc: TutorIcon 
+        },
+        { 
+          title: 'Projekty uniwersyteckie', 
+          desc: 'Podczas studiów zdobyłem doświadczenie w planowaniu projektów, kodowaniu w językach takich jak Python i Java oraz korzystaniu z narzędzi takich jak Git i bazy danych. Poprawiłem również swoje umiejętności pracy zespołowej, komunikacji i rozwiązywania problemów podczas pracy nad projektami technicznymi.', 
+          imageSrc: UniversityProjectsIcon 
+        },
       ],
     },
+
     3: {
       name: 'Umiejętności',
       colors: ['#000000', '#4A704A'],
