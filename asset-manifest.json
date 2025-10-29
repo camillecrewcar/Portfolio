@@ -1,0 +1,42 @@
+{
+  "files": {
+    "main.css": "/Portfolio/static/css/main.ecac31dd.css",
+    "main.js": "/Portfolio/static/js/main.e8a0ff85.js",
+    "static/js/453.1407b060.chunk.js": "/Portfolio/static/js/453.1407b060.chunk.js",
+    "static/media/MuseumForum.jpg": "/Portfolio/static/media/MuseumForum.2689e1304e163bc613a7.jpg",
+    "static/media/developing.png": "/Portfolio/static/media/developing.1555de467c57898481a6.png",
+    "static/media/mlagents.png": "/Portfolio/static/media/mlagents.c99ea7caa9e79ea8e890.png",
+    "static/media/Backend.png": "/Portfolio/static/media/Backend.836b6e8967aec152c968.png",
+    "static/media/MachineLearning.png": "/Portfolio/static/media/MachineLearning.7b7a1da435f77ef95011.png",
+    "static/media/GameDev.png": "/Portfolio/static/media/GameDev.a17f4f2ca14f4d58e982.png",
+    "static/media/sport.png": "/Portfolio/static/media/sport.1055d0de3d876f231439.png",
+    "static/media/aboutMe.png": "/Portfolio/static/media/aboutMe.2de13cc8b4d7adf91c0a.png",
+    "static/media/AIcert.jpg": "/Portfolio/static/media/AIcert.9708f53c3bfc4cc5be0a.jpg",
+    "static/media/coding.jpg": "/Portfolio/static/media/coding.34b947536368262e6903.jpg",
+    "static/media/llm.jpg": "/Portfolio/static/media/llm.a70af44de7c3f783fab4.jpg",
+    "static/media/UniversityProjects.jpg": "/Portfolio/static/media/UniversityProjects.2c6309f7891eecae825f.jpg",
+    "static/media/ComputerScience.jpeg": "/Portfolio/static/media/ComputerScience.005f62c2f13ba3c1f2b5.jpeg",
+    "static/media/Tutor.jpg": "/Portfolio/static/media/Tutor.d66df43ea464c1078c6a.jpg",
+    "static/media/copilot.png": "/Portfolio/static/media/copilot.6f00b79b2395722fdad2.png",
+    "static/media/Basics.jpg": "/Portfolio/static/media/Basics.a9c207495f33efc7d96a.jpg",
+    "static/media/email.jpg": "/Portfolio/static/media/email.5e036d377452b178c977.jpg",
+    "static/media/architecture.jpg": "/Portfolio/static/media/architecture.10819683f97082a65cd5.jpg",
+    "static/media/economics.png": "/Portfolio/static/media/economics.cc51e825ee4fcdd25be5.png",
+    "static/media/phone.png": "/Portfolio/static/media/phone.c1b3ec98f702ff7039f9.png",
+    "static/media/english.png": "/Portfolio/static/media/english.406d0f11b8fe4034746c.png",
+    "static/media/board.png": "/Portfolio/static/media/board.d598cdc85e0407af5e09.png",
+    "static/media/DK.png": "/Portfolio/static/media/DK.cd296e6d56d74dcc3473.png",
+    "static/media/Unity-logo.png": "/Portfolio/static/media/Unity-logo.92af10b165fa5a022d1a.png",
+    "static/media/boardgames.png": "/Portfolio/static/media/boardgames.f2598de9d3581ef55c67.png",
+    "static/media/pawn.png": "/Portfolio/static/media/pawn.87462fe9f4e0227f8954.png",
+    "static/media/TechnicalSchool.jpg": "/Portfolio/static/media/TechnicalSchool.3e5d4a9597920f6a616e.jpg",
+    "index.html": "/Portfolio/index.html",
+    "main.ecac31dd.css.map": "/Portfolio/static/css/main.ecac31dd.css.map",
+    "main.e8a0ff85.js.map": "/Portfolio/static/js/main.e8a0ff85.js.map",
+    "453.1407b060.chunk.js.map": "/Portfolio/static/js/453.1407b060.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.ecac31dd.css",
+    "static/js/main.e8a0ff85.js"
+  ]
+}
