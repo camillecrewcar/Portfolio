@@ -1,0 +1,209 @@
+.topic-section {
+  min-width: 0;
+  scroll-margin-top: 16px;
+}
+
+.topic-head {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 28px;
+}
+
+.topic-badge {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 56px;
+  height: 56px;
+  border-radius: 14px;
+  background: color-mix(in srgb, var(--accent) 22%, var(--surface));
+  border: 1px solid color-mix(in srgb, var(--accent) 60%, transparent);
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+.topic-title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 3.6vw, 2.6rem);
+  font-weight: 600;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+
+.topic-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.topic-nav {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-top: 28px;
+}
+
+.topic-nav button {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+  min-width: 0;
+  padding: 14px 18px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: transparent;
+  color: var(--ink);
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+  transition: border-color 0.2s ease, background-color 0.2s ease;
+}
+
+.topic-nav button.next {
+  align-items: flex-end;
+  text-align: right;
+}
+
+.topic-nav button:hover:not(:disabled) {
+  border-color: var(--ink);
+  background: var(--surface);
+}
+
+.topic-nav button:disabled {
+  cursor: default;
+  opacity: 0.6;
+}
+
+.topic-nav span {
+  font-size: 0.78rem;
+  color: var(--subtle);
+}
+
+.topic-nav strong {
+  max-width: 100%;
+  font-size: 0.95rem;
+  font-weight: 600;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+@media (min-width: 1024px) {
+  /* The panel fills the screen height next to the board; only its cards scroll */
+  .topic-section {
+    grid-area: panel;
+    position: sticky;
+    top: 16px;
+    height: calc(100vh - 104px);
+    min-height: 420px;
+  }
+
+  .topic-panel {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+
+  .topic-head {
+    flex: none;
+    gap: 14px;
+    margin-bottom: 16px;
+    /* Leaves room for the previous / next buttons */
+    padding-right: 340px;
+  }
+
+  .topic-badge {
+    width: 46px;
+    height: 46px;
+    border-radius: 12px;
+    font-size: 1.1rem;
+  }
+
+  .topic-title {
+    font-size: 2rem;
+  }
+
+  .topic-scroll {
+    flex: 1;
+    min-height: 0;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    /* Room for card shadows and hover lift, which would otherwise be clipped */
+    margin: -8px -14px 0;
+    padding: 8px 14px 16px;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(24, 24, 27, 0.25) transparent;
+  }
+
+  /* Each card is as tall as its text; cards stack in up to three columns
+     (masonry style, no gaps under short cards) and the panel scrolls down */
+  .topic-cards {
+    display: block;
+    columns: 250px 3;
+    column-gap: 14px;
+  }
+
+  .topic-cards > * {
+    break-inside: avoid;
+    margin-bottom: 14px;
+  }
+
+  /* Previous / next sit beside the topic title instead of taking a row below the cards */
+  .topic-nav {
+    position: absolute;
+    top: 4px;
+    right: 0;
+    display: flex;
+    gap: 8px;
+    margin: 0;
+  }
+
+  .topic-nav button {
+    flex-direction: row;
+    align-items: baseline;
+    gap: 6px;
+    max-width: 190px;
+    padding: 8px 12px;
+    border-radius: 10px;
+  }
+
+  .topic-nav span {
+    display: none;
+  }
+
+  .topic-nav button::before {
+    content: '←';
+    color: var(--subtle);
+  }
+
+  .topic-nav button.next::before {
+    content: none;
+  }
+
+  .topic-nav button.next::after {
+    content: '→';
+    color: var(--subtle);
+  }
+
+  .topic-nav strong {
+    font-size: 0.85rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .topic-head {
+    gap: 12px;
+  }
+
+  .topic-badge {
+    width: 46px;
+    height: 46px;
+    font-size: 1.1rem;
+  }
+}

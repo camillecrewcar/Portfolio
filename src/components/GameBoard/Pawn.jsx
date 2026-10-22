@@ -1,8 +1,8 @@
 import React from 'react';
 
 // `hop` changes on every step, which remounts the body and replays the hop animation
-const Pawn = ({ left, top, hop }) => (
-  <div className="pawn" style={{ left, top }}>
+const Pawn = ({ left, top, hop, onMarker }) => (
+  <div className={`pawn${onMarker ? ' on-marker' : ''}`} style={{ left, top }}>
     <div key={hop} className={`pawn-body${hop ? ' hop' : ''}`}>
       <svg viewBox="0 0 40 54" aria-hidden="true">
         <defs>

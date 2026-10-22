@@ -23,6 +23,7 @@
 
 .dice-toss,
 .dice-tilt,
+.dice-flip,
 .dice-cube,
 .dice-face {
   display: block;
@@ -31,9 +32,15 @@
   transform-style: preserve-3d;
 }
 
-/* A fixed tilt so the die reads as a solid cube, not a flat square */
+/* Seen from above at an angle, like a die on a table: the top face (the result) is the
+   biggest, clearest face, while the sides still show it's a solid cube */
 .dice-tilt {
-  transform: rotateX(-24deg) rotateY(-30deg);
+  transform: rotateX(-52deg) rotateY(-28deg);
+}
+
+/* Turns the cube's front face up, so the rolled value lands on top */
+.dice-flip {
+  transform: rotateX(90deg);
 }
 
 .dice-cube {

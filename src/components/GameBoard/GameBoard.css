@@ -21,6 +21,16 @@
     0 34px 60px -30px rgba(20, 40, 30, 0.55);
 }
 
+.board-frame.medium {
+  --disc: 44px;
+  --label-width: 104px;
+  --road: 34px;
+}
+
+.medium .space-label {
+  font-size: 11px;
+}
+
 .board-frame.compact {
   --disc: 40px;
   --label-width: 88px;
@@ -95,16 +105,10 @@
   transition: box-shadow 0.25s ease;
 }
 
-.track-marker.start.active {
-  box-shadow: 0 0 0 4px rgba(31, 74, 61, 0.25), 0 3px 0 rgba(0, 0, 0, 0.15);
-}
-
-.track-marker.start:focus-visible {
-  outline: 2px solid var(--ink);
-  outline-offset: 3px;
-}
-
 .track-marker.finish {
+  font-family: inherit;
+  cursor: pointer;
+  transition: box-shadow 0.25s ease;
   color: var(--ink);
   background-color: #fff;
   background-image:
@@ -113,6 +117,20 @@
   background-size: 8px 8px;
   background-position: 0 0, 4px 4px;
   border: 1px solid rgba(24, 24, 27, 0.2);
+}
+
+.track-marker.start.active {
+  box-shadow: 0 0 0 4px rgba(31, 74, 61, 0.25), 0 3px 0 rgba(0, 0, 0, 0.15);
+}
+
+.track-marker.finish.active {
+  box-shadow: 0 0 0 4px rgba(192, 138, 43, 0.35), 0 3px 0 rgba(0, 0, 0, 0.15);
+}
+
+.track-marker.start:focus-visible,
+.track-marker.finish:focus-visible {
+  outline: 2px solid var(--ink);
+  outline-offset: 3px;
 }
 
 .compact .track-marker {
@@ -224,6 +242,11 @@
   pointer-events: none;
 }
 
+/* START / FINISH are short pills, so stand just above them instead of over the text */
+.pawn.on-marker {
+  transform: translate(-50%, calc(-100% - 13px));
+}
+
 .compact .pawn {
   width: 24px;
 }
@@ -255,8 +278,8 @@
 }
 
 .board-tray .dice {
-  --size: 50px;
-  margin: 0 6px 6px;
+  --size: 58px;
+  margin: 4px 8px 8px;
 }
 
 .board-tray .dice-shadow {
@@ -287,8 +310,37 @@
 }
 
 .compact .board-tray .dice {
-  --size: 42px;
+  --size: 48px;
 }
+
+/* "You rolled 4" after each throw */
+.board-tray-text .dice-result {
+  opacity: 1;
+  font-weight: 500;
+}
+
+.dice-result {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.9rem;
+}
+
+.dice-result b {
+  display: grid;
+  place-items: center;
+  min-width: 30px;
+  height: 30px;
+  padding: 0 4px;
+  box-sizing: border-box;
+  border-radius: 8px;
+  background: #f4ead2;
+  color: var(--frame);
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  font-weight: 600;
+}
+
 
 .compact .board-tray-text strong {
   font-size: 1rem;

@@ -1,70 +1,55 @@
-# Getting Started with Create React App
+# Kamil Krukar – Portfolio
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+An interactive portfolio presented as a board game. Visitors roll a die (or pick a space) and a pawn
+walks a winding path from START to FINISH; each space is a topic such as Education, Experience or Skills.
+Available in English and Polish.
 
-## Available Scripts
+Live site: https://camillecrewcar.github.io/Portfolio
 
-In the project directory, you can run:
+Built with React 19, Create React App and Framer Motion.
 
-### `npm start`
+## Scripts
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+| Command          | What it does                                                   |
+| ---------------- | -------------------------------------------------------------- |
+| `npm start`      | Runs the dev server at http://localhost:3000/Portfolio          |
+| `npm test`       | Runs the tests in watch mode                                   |
+| `npm run build`  | Builds the production bundle into `build/`                     |
+| `npm run deploy` | Builds and publishes `build/` to GitHub Pages (`gh-pages` branch) |
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Project structure
 
-### `npm test`
+```
+src/
+├── index.js                 Entry point
+├── App.jsx                  Page layout; wires the game state to the components
+├── App.css                  Design tokens, page background and layout grid
+├── components/              One folder per component, with its styles next to it
+│   ├── Header/              Name, Contact button, language switch
+│   ├── Hero/                Greeting
+│   ├── GameBoard/           Board, track geometry (buildTrack.js) and the pawn
+│   ├── Dice/                3D die
+│   ├── TopicPanel/          Content next to the board: START card, topic cards or FINISH card
+│   ├── TopicCard/           A single entry within a topic
+│   ├── ProfileCards/        START (intro) and FINISH cards
+│   └── Footer/
+├── hooks/
+│   └── useBoardGame.js      Pawn movement and game rules
+├── content/                 Everything the site says
+│   ├── en.js, pl.js         Topics and interface text per language
+│   ├── images.js            Image imports, plus the profile photo
+│   └── index.js
+├── constants/               Game rules (game.js) and contact details (contact.js)
+├── assets/images/           Images used by the content
+└── styles/global.css        Base page styles
+```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Editing content
 
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- **Text and topics:** edit `src/content/en.js` and `src/content/pl.js`, keeping both languages in step.
+  Each topic is `{ id, name, color, items }`; each item is `{ title, desc, imageSrc }`, with optional
+  `href` (link), `imageFit: 'contain'` (show logos whole) and `imageScale` (zoom).
+- **Images:** add the file to `src/assets/images/` (kebab-case name), register it in
+  `src/content/images.js`, then refer to it as `images.yourName`.
+- **Contact details:** `src/constants/contact.js`.
+- **Profile photo:** `profilePhoto` in `src/content/images.js`.

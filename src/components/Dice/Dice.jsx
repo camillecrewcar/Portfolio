@@ -1,9 +1,10 @@
 import React, { useState, useRef, useEffect } from 'react';
-import '../ComponentStyles/dice.css';
+import './Dice.css';
 
 const ROLL_MS = 1100;
 
-// Cube rotation that brings each value's face to the front
+// Cube rotation that brings each value's face to the front; the .dice-flip wrapper
+// then turns the front face up, so the rolled value is the number on top
 const FACE_ROTATION = {
   1: { x: 0, y: 0 },
   2: { x: -90, y: 0 },
@@ -80,19 +81,21 @@ const Dice = ({ disabled, onRollStart, onResult, label, rollRef }) => {
       <span className="dice-shadow" />
       <span className="dice-toss">
         <span className="dice-tilt">
-          <span
-            className="dice-cube"
-            style={{
-              transform: `rotateX(${rotation.x}deg) rotateY(${rotation.y}deg) rotateZ(${rotation.z}deg)`,
-            }}
-          >
-            {FACES.map(({ value, side }) => (
-              <span key={value} className={`dice-face ${side}`}>
-                {PIPS[value].map(([row, col], i) => (
-                  <span key={i} className="pip" style={{ gridRow: row, gridColumn: col }} />
-                ))}
-              </span>
-            ))}
+          <span className="dice-flip">
+            <span
+              className="dice-cube"
+              style={{
+                transform: `rotateX(${rotation.x}deg) rotateY(${rotation.y}deg) rotateZ(${rotation.z}deg)`,
+              }}
+            >
+              {FACES.map(({ value, side }) => (
+                <span key={value} className={`dice-face ${side}`}>
+                  {PIPS[value].map(([row, col], i) => (
+                    <span key={i} className="pip" style={{ gridRow: row, gridColumn: col }} />
+                  ))}
+                </span>
+              ))}
+            </span>
           </span>
         </span>
       </span>
