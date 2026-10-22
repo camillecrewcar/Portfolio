@@ -1,62 +1,118 @@
 .dice {
-  margin: 20px auto;
-  perspective: 1000px; /* Add perspective to container */
-  cursor: pointer;  
-}
-
-
-.dice-face {
-  width: 60px;
-  height: 60px;
+  --size: 56px;
   position: relative;
-  transform-style: preserve-3d; /* Enable 3D transforms */
+  width: var(--size);
+  height: var(--size);
+  padding: 0;
+  border: none;
+  background: none;
+  cursor: pointer;
+  perspective: 500px;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.dice:disabled {
+  cursor: default;
+}
+
+.dice:focus-visible {
+  outline: 2px solid var(--ink);
+  outline-offset: 10px;
+  border-radius: 8px;
+}
+
+.dice-toss,
+.dice-tilt,
+.dice-cube,
+.dice-face {
+  display: block;
+  position: absolute;
+  inset: 0;
+  transform-style: preserve-3d;
+}
+
+/* A fixed tilt so the die reads as a solid cube, not a flat square */
+.dice-tilt {
+  transform: rotateX(-24deg) rotateY(-30deg);
+}
+
+.dice-cube {
+  transition: transform 1.1s cubic-bezier(0.2, 0.8, 0.25, 1);
+}
+
+.dice:not(:disabled):hover .dice-toss {
+  transform: translateY(-4px);
+}
+
+.dice-toss {
+  transition: transform 0.2s ease;
+}
+
+.dice.rolling .dice-toss {
+  animation: dice-toss 1.1s ease-out;
 }
 
 .dice-face {
-  width: 60px;
-  height: 60px;
-  background: #fff;
-  border: 2px solid #333;
-  border-radius: 8px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 24px;
-  margin: 0 auto;
-}
-.face {
-  position: absolute;
-  width: 60px;
-  height: 60px;
-  background: #fff;
-  border: none; /* Remove explicit border */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 36px; /* Larger size to focus on dots */
-  box-shadow: none; /* Remove shadow if you want it completely flat */
-}
-.rolling {
-  animation: spin 0.1s linear infinite;
-}
-/* Style for each face */
-.face {
-  position: absolute;
-  width: 60px;
-  height: 60px;
-  background: #fff;
-  border: 2px solid #333;
-  border-radius: 8px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 24px;
+  display: grid;
+  grid-template: repeat(3, 1fr) / repeat(3, 1fr);
+  padding: 14%;
+  box-sizing: border-box;
+  border-radius: 14%;
+  background: linear-gradient(145deg, #ffffff 0%, #f3efe7 100%);
+  box-shadow:
+    inset 0 0 0 1px rgba(24, 24, 27, 0.1),
+    inset 0 -3px 6px rgba(24, 24, 27, 0.06);
+  backface-visibility: hidden;
 }
 
-/* Position each face in 3D space */
-.front  { transform: translateZ(30px); }
-.back   { transform: rotateX(180deg) translateZ(30px); }
-.right  { transform: rotateY(90deg) translateZ(30px); }
-.left   { transform: rotateY(-90deg) translateZ(30px); }
-.top    { transform: rotateX(90deg) translateZ(30px); }
-.bottom { transform: rotateX(-90deg) translateZ(30px); }
+.front  { transform: translateZ(calc(var(--size) / 2)); }
+.back   { transform: rotateY(180deg) translateZ(calc(var(--size) / 2)); }
+.right  { transform: rotateY(90deg) translateZ(calc(var(--size) / 2)); }
+.left   { transform: rotateY(-90deg) translateZ(calc(var(--size) / 2)); }
+.top    { transform: rotateX(90deg) translateZ(calc(var(--size) / 2)); }
+.bottom { transform: rotateX(-90deg) translateZ(calc(var(--size) / 2)); }
+
+.pip {
+  width: 72%;
+  height: 72%;
+  place-self: center;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #4b4a52, #141417 70%);
+}
+
+.dice-shadow {
+  position: absolute;
+  left: 50%;
+  bottom: -14px;
+  width: 90%;
+  height: 12px;
+  border-radius: 50%;
+  background: radial-gradient(closest-side, rgba(24, 24, 27, 0.28), transparent);
+  transform: translateX(-50%);
+}
+
+.dice.rolling .dice-shadow {
+  animation: dice-shadow 1.1s ease-out;
+}
+
+@keyframes dice-toss {
+  0%   { transform: translateY(0); }
+  30%  { transform: translateY(-38px); }
+  58%  { transform: translateY(0); }
+  72%  { transform: translateY(-9px); }
+  86%  { transform: translateY(0); }
+  93%  { transform: translateY(-2px); }
+  100% { transform: translateY(0); }
+}
+
+@keyframes dice-shadow {
+  0%, 58%, 86%, 100% { transform: translateX(-50%) scale(1); opacity: 1; }
+  30% { transform: translateX(-50%) scale(0.55); opacity: 0.45; }
+  72% { transform: translateX(-50%) scale(0.85); opacity: 0.8; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dice-cube { transition-duration: 0.3s; }
+  .dice.rolling .dice-toss,
+  .dice.rolling .dice-shadow { animation: none; }
+}

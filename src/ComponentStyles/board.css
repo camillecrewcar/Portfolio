@@ -1,0 +1,300 @@
+/* ---------- Board frame ---------- */
+.board-frame {
+  --frame: #1f4a3d;
+  --frame-text: #f4ead2;
+  --disc: 52px;
+  --label-width: 116px;
+  --road: 40px;
+
+  width: 100%;
+  max-width: 620px;
+  margin: 0 auto;
+  padding: 12px;
+  box-sizing: border-box;
+  border-radius: 24px;
+  background:
+    radial-gradient(circle at 20% 0%, rgba(255, 255, 255, 0.08), transparent 60%),
+    var(--frame);
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.08),
+    0 2px 4px rgba(20, 30, 25, 0.1),
+    0 34px 60px -30px rgba(20, 40, 30, 0.55);
+}
+
+.board-frame.compact {
+  --disc: 40px;
+  --label-width: 88px;
+  --road: 30px;
+  padding: 8px;
+  border-radius: 20px;
+}
+
+.board-surface {
+  position: relative;
+  overflow: hidden;
+  border-radius: 14px;
+  background-color: #fbf5e6;
+  background-image:
+    radial-gradient(rgba(120, 90, 40, 0.09) 1px, transparent 1px),
+    radial-gradient(circle at 50% 40%, #fffaf0, #f5ecd6 80%);
+  background-size: 16px 16px, auto;
+  box-shadow: inset 0 0 0 2px rgba(31, 74, 61, 0.15), inset 0 2px 10px rgba(80, 60, 20, 0.12);
+}
+
+/* ---------- Road ---------- */
+.board-track {
+  position: absolute;
+  inset: 0;
+  overflow: visible;
+}
+
+.board-track path {
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.track-edge {
+  stroke: #d8c49a;
+  stroke-width: calc(var(--road) + 8px);
+}
+
+.track-road {
+  stroke: #f1e2bd;
+  stroke-width: var(--road);
+}
+
+.track-line {
+  stroke: #ffffff;
+  stroke-width: 3px;
+  stroke-dasharray: 2 12;
+  opacity: 0.9;
+}
+
+/* ---------- START / FINISH ---------- */
+.track-marker {
+  position: absolute;
+  z-index: 1;
+  transform: translate(-50%, -50%);
+  padding: 5px 10px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  box-shadow: 0 3px 0 rgba(0, 0, 0, 0.15);
+}
+
+.track-marker.start {
+  border: none;
+  background: var(--frame);
+  color: var(--frame-text);
+  font-family: inherit;
+  cursor: pointer;
+  transition: box-shadow 0.25s ease;
+}
+
+.track-marker.start.active {
+  box-shadow: 0 0 0 4px rgba(31, 74, 61, 0.25), 0 3px 0 rgba(0, 0, 0, 0.15);
+}
+
+.track-marker.start:focus-visible {
+  outline: 2px solid var(--ink);
+  outline-offset: 3px;
+}
+
+.track-marker.finish {
+  color: var(--ink);
+  background-color: #fff;
+  background-image:
+    linear-gradient(45deg, rgba(24, 24, 27, 0.14) 25%, transparent 25%, transparent 75%, rgba(24, 24, 27, 0.14) 75%),
+    linear-gradient(45deg, rgba(24, 24, 27, 0.14) 25%, transparent 25%, transparent 75%, rgba(24, 24, 27, 0.14) 75%);
+  background-size: 8px 8px;
+  background-position: 0 0, 4px 4px;
+  border: 1px solid rgba(24, 24, 27, 0.2);
+}
+
+.compact .track-marker {
+  padding: 4px 7px;
+  font-size: 9px;
+}
+
+/* ---------- Spaces ---------- */
+.space {
+  position: absolute;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  width: var(--label-width);
+  padding: 0;
+  border: none;
+  background: none;
+  font: inherit;
+  color: var(--ink);
+  cursor: pointer;
+  transform: translate(-50%, calc(var(--disc) / -2));
+  -webkit-tap-highlight-color: transparent;
+}
+
+.space-disc {
+  display: grid;
+  place-items: center;
+  width: var(--disc);
+  height: var(--disc);
+  box-sizing: border-box;
+  border-radius: 50%;
+  border: 5px solid var(--space-color);
+  background: #fff;
+  font-family: var(--font-display);
+  font-size: calc(var(--disc) * 0.38);
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  box-shadow:
+    0 3px 0 color-mix(in srgb, var(--space-color) 55%, #000),
+    0 8px 14px -6px rgba(0, 0, 0, 0.35);
+  transition: transform 0.2s ease, box-shadow 0.25s ease;
+}
+
+.compact .space-disc {
+  border-width: 4px;
+}
+
+.space-label {
+  max-width: 100%;
+  padding: 3px 7px;
+  box-sizing: border-box;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.94);
+  box-shadow: 0 1px 3px rgba(60, 40, 10, 0.18);
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1.2;
+  text-align: center;
+  overflow-wrap: anywhere;
+  hyphens: auto;
+  transition: background-color 0.25s ease, color 0.25s ease;
+}
+
+.compact .space-label {
+  padding: 2px 5px;
+  font-size: 10px;
+}
+
+.space:hover .space-disc {
+  transform: translateY(-2px) scale(1.06);
+}
+
+.space:focus-visible {
+  outline: none;
+}
+
+.space:focus-visible .space-disc {
+  outline: 2px solid var(--ink);
+  outline-offset: 3px;
+}
+
+.space.active {
+  z-index: 3;
+}
+
+.space.active .space-disc {
+  transform: scale(1.12);
+  box-shadow:
+    0 0 0 5px color-mix(in srgb, var(--space-color) 35%, transparent),
+    0 3px 0 color-mix(in srgb, var(--space-color) 55%, #000),
+    0 10px 18px -6px rgba(0, 0, 0, 0.4);
+}
+
+.space.active .space-label {
+  background: var(--ink);
+  color: #fff;
+}
+
+/* ---------- Pawn ---------- */
+.pawn {
+  position: absolute;
+  z-index: 4;
+  width: 32px;
+  /* Stands on the top rim of the disc so the number stays visible */
+  transform: translate(-50%, calc(-100% - var(--disc) * 0.3));
+  transition: left 0.24s ease, top 0.24s ease;
+  pointer-events: none;
+}
+
+.compact .pawn {
+  width: 24px;
+}
+
+.pawn-body svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  filter: drop-shadow(0 4px 3px rgba(24, 24, 27, 0.35));
+}
+
+.pawn-body.hop {
+  animation: pawn-hop 0.24s ease-out;
+}
+
+@keyframes pawn-hop {
+  0%   { transform: translateY(0); }
+  45%  { transform: translateY(-45%); }
+  100% { transform: translateY(0); }
+}
+
+/* ---------- Dice tray ---------- */
+.board-tray {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  padding: 18px 12px 8px;
+  color: var(--frame-text);
+}
+
+.board-tray .dice {
+  --size: 50px;
+  margin: 0 6px 6px;
+}
+
+.board-tray .dice-shadow {
+  background: radial-gradient(closest-side, rgba(0, 0, 0, 0.45), transparent);
+}
+
+.board-tray-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.board-tray-text strong {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  font-weight: 600;
+}
+
+.board-tray-text span {
+  font-size: 0.82rem;
+  opacity: 0.75;
+}
+
+.compact .board-tray {
+  gap: 14px;
+  padding: 14px 8px 6px;
+}
+
+.compact .board-tray .dice {
+  --size: 42px;
+}
+
+.compact .board-tray-text strong {
+  font-size: 1rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pawn { transition: none; }
+  .pawn-body.hop { animation: none; }
+}

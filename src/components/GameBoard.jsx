@@ -1,196 +1,137 @@
 import React, { useState, useEffect, useRef } from 'react';
+import Dice from './Dice';
 import Pawn from './Pawn';
+import '../ComponentStyles/board.css';
 
-const GameBoard = ({ position, prevPosition, onPositionChange, topics }) => {
-  const boardSize = topics.length;
-  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-  const [currentPos, setCurrentPos] = useState(prevPosition);
-  const [isHopping, setIsHopping] = useState(false);
-  const [currentHop, setCurrentHop] = useState(null);
-  const [hoveredCell, setHoveredCell] = useState(null);
-  const boardRef = useRef(null);
+// Builds a winding S-shaped track: straight runs joined by half-circle turns.
+// Everything is in real pixels so labels keep a readable size on any screen.
+const buildTrack = (width, count) => {
+  const compact = width < 500;
+  const runs = compact ? 4 : 3;
+  const margin = compact ? 46 : 64;
+  const r = compact ? 58 : 76;
+  const top = compact ? 52 : 66;
+  const bottom = compact ? 58 : 74;
+  const x0 = margin + r;
+  const x1 = width - margin - r;
+  const lineLength = x1 - x0;
 
-  // Dynamic radius based on screen size - INCREASED for more spacing between fields
-  const getRadius = () => {
-    if (windowWidth <= 480) return 150; // Very small screens (increased from 120)
-    if (windowWidth <= 768) return 210; // Small screens (increased from 180)
-    if (windowWidth <= 1024) return 250; // Medium screens (increased from 220)
-    return 280; // Default for large screens (increased from 250)
+  const segments = [];
+  for (let k = 0; k < runs; k++) {
+    const y = top + 2 * r * k;
+    const leftToRight = k % 2 === 0;
+    segments.push({ type: 'line', from: leftToRight ? x0 : x1, to: leftToRight ? x1 : x0, y });
+    if (k < runs - 1) {
+      segments.push({ type: 'arc', cx: leftToRight ? x1 : x0, cy: y + r, side: leftToRight ? 1 : -1 });
+    }
+  }
+
+  const segmentLength = (seg) => (seg.type === 'line' ? lineLength : Math.PI * r);
+  const total = segments.reduce((sum, seg) => sum + segmentLength(seg), 0);
+
+  const pointAt = (distance) => {
+    let s = distance;
+    for (const seg of segments) {
+      const len = segmentLength(seg);
+      if (s <= len) {
+        if (seg.type === 'line') {
+          return { x: seg.from + ((seg.to - seg.from) * s) / len, y: seg.y };
+        }
+        const angle = s / r;
+        return { x: seg.cx + seg.side * r * Math.sin(angle), y: seg.cy - r * Math.cos(angle) };
+      }
+      s -= len;
+    }
+    const last = segments[segments.length - 1];
+    return { x: last.to, y: last.y };
   };
-  
-  const radius = getRadius();
 
-  // Update window size on resize
+  const path = segments
+    .map((seg) =>
+      seg.type === 'line'
+        ? `L ${seg.to} ${seg.y}`
+        : `A ${r} ${r} 0 0 ${seg.side === 1 ? 1 : 0} ${seg.cx} ${seg.cy + r}`
+    )
+    .join(' ');
+
+  // Spaces are spread evenly between START and FINISH
+  const spaces = Array.from({ length: count }, (_, i) => pointAt((total * (i + 1)) / (count + 1)));
+
+  return {
+    compact,
+    height: top + 2 * r * (runs - 1) + bottom,
+    d: `M ${x0} ${top} ${path}`,
+    start: pointAt(0),
+    finish: pointAt(total),
+    spaces,
+  };
+};
+
+const GameBoard = ({ topics, pawnPos, activeTopic, hop, busy, rollRef, onSelect, onRollStart, onRoll, text }) => {
+  const [width, setWidth] = useState(560);
+  const surfaceRef = useRef(null);
+
   useEffect(() => {
-    const handleResize = () => {
-      setWindowWidth(window.innerWidth);
-    };
-    
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
+    const el = surfaceRef.current;
+    if (!el || typeof ResizeObserver === 'undefined') return;
+    const observer = new ResizeObserver(() => setWidth(el.clientWidth));
+    observer.observe(el);
+    return () => observer.disconnect();
   }, []);
 
-  const getPositionCoords = (pos) => {
-    const index = pos - 1; // Adjust for 1-based indexing
-    const angle = (index / boardSize) * 2 * Math.PI;
-    return {
-      x: Math.cos(angle) * radius - (Math.cos(angle) * radius / 300),
-      y: Math.sin(angle) * radius - (Math.sin(angle) * radius / 20),
-    };
-  };
-
-  const handleFieldClick = (targetPosition) => {
-    if (!isHopping && targetPosition !== currentPos) {
-      setIsHopping(true);
-      setCurrentHop(targetPosition);
-      setTimeout(() => {
-        setCurrentPos(targetPosition);
-        setCurrentHop(null);
-        setIsHopping(false);
-        if (onPositionChange) {
-          onPositionChange(targetPosition);
-        }
-      }, 400);
-    }
-  };
-
-  useEffect(() => {
-    if (prevPosition !== position && !isHopping) {
-      setIsHopping(true);
-      const steps = [];
-      let start = prevPosition;
-      let end = position;
-      if (end <= start) end += boardSize;
-      for (let i = start; i <= end; i++) {
-        steps.push(((i - 1) % boardSize) + 1);
-      }
-      let stepIndex = 0;
-      setCurrentPos(steps[0]);
-      const moveToNextPosition = () => {
-        if (stepIndex < steps.length - 1) {
-          stepIndex++;
-          setCurrentHop(steps[stepIndex]);
-          setTimeout(() => {
-            setCurrentPos(steps[stepIndex]);
-            setCurrentHop(null);
-            setTimeout(moveToNextPosition, 100);
-          }, 400);
-        } else {
-          setIsHopping(false);
-        }
-      };
-      setTimeout(moveToNextPosition, 100);
-    }
-  }, [position, prevPosition, boardSize]);
-
-  // Get cell size based on screen width - slightly smaller to accommodate more spacing
-  const getCellSize = (isHovered) => {
-    if (windowWidth <= 480) {
-      return isHovered ? '50px' : '46px';
-    } else if (windowWidth <= 768) {
-      return isHovered ? '72px' : '68px';
-    } else {
-      return isHovered ? '86px' : '78px';
-    }
-  };
-
-  // Get font size based on screen width
-  const getFontSize = () => {
-    if (windowWidth <= 480) return '8px';
-    if (windowWidth <= 768) return '12px';
-    return '14px';
-  };
-
-  // Get board size based on screen width - INCREASED to accommodate larger radius
-  const getBoardSize = () => {
-    if (windowWidth <= 480) return '450px';
-    if (windowWidth <= 768) return '600px';
-    if (windowWidth <= 1024) return '650px';
-    return '700px';
-  };
-
-  // Responsively adjust padding - reduced to fit text better
-  const getPadding = () => {
-    if (windowWidth <= 480) return '6px';
-    if (windowWidth <= 768) return '10px';
-    return '12px';
-  };
-
-  // Get cell margin for centering (handles the -X -X offset)
-  const getCellMargin = () => {
-    const cellSize = parseInt(getCellSize(false), 10);
-    const halfCell = Math.floor(cellSize / 2);
-    return `-${halfCell}px -${halfCell}px`;
-  };
+  const track = buildTrack(width, topics.length);
+  // Position 0 is the START marker
+  const pawn = pawnPos === 0 ? track.start : track.spaces[pawnPos - 1];
 
   return (
-    <div
-      ref={boardRef}
-      className="game-board"
-      style={{
-        position: 'relative',
-        width: getBoardSize() - 80,
-        height: getBoardSize(),
-      }}
-    >
-      <div
-        style={{
-          position: 'absolute',
-          top: '50%',
-          left: '50%',
-          transform: 'translate(-50%, -50%)',
-        }}
-      >
+    <div className={`board-frame${track.compact ? ' compact' : ''}`}>
+      <div className="board-surface" ref={surfaceRef} style={{ height: track.height }}>
+        <svg className="board-track" width={width} height={track.height} aria-hidden="true">
+          <path className="track-edge" d={track.d} />
+          <path className="track-road" d={track.d} />
+          <path className="track-line" d={track.d} />
+        </svg>
+
+        <button
+          type="button"
+          className={`track-marker start${activeTopic === 0 ? ' active' : ''}`}
+          style={{ left: track.start.x, top: track.start.y }}
+          onClick={() => onSelect(0)}
+        >
+          {text.start}
+        </button>
+        <span className="track-marker finish" style={{ left: track.finish.x, top: track.finish.y }}>
+          {text.finish}
+        </span>
+
         {topics.map((topic, index) => {
-          const angle = (index / boardSize) * 2 * Math.PI;
-          const x = Math.cos(angle) * radius;
-          const y = Math.sin(angle) * radius;
-          const fieldPosition = topic.id;
-          const isHovered = hoveredCell === fieldPosition;
-          const cellSize = getCellSize(isHovered);
+          const { x, y } = track.spaces[index];
+          const isActive = topic.id === activeTopic;
 
           return (
-            <div
-              key={index}
-              className="board-cell"
-              onClick={() => handleFieldClick(fieldPosition)}
-              onMouseEnter={() => setHoveredCell(fieldPosition)}
-              onMouseLeave={() => setHoveredCell(null)}
-              style={{
-                position: 'absolute',
-                transform: `translate(${x}px, ${y - y / 5}px)`,
-                width: cellSize,
-                height: cellSize,
-                borderRadius: windowWidth <= 480 ? '8px' : '12px',
-                backgroundImage: 'url(../res/field.png)',
-                backgroundSize: 'cover',
-                backgroundPosition: 'center',
-                border: isHovered ? '2px solid rgba(220, 220, 220, 0.9)' : '1px solid #ffffff',
-                boxShadow: '0 3px 6px rgba(0, 0, 0, 0.2)',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                textAlign: 'center',
-                padding: getPadding(),
-                margin: getCellMargin(),
-                fontSize: getFontSize(),
-                color: '#333333',
-                backgroundColor: isHovered ? 'rgba(220, 220, 220, 0.9)' : 'rgba(255, 255, 255, 0.9)',
-                transition: 'width 0.2s ease-in-out, height 0.2s ease-in-out',
-                cursor: 'pointer',
-                overflow: 'hidden',
-                textOverflow: 'ellipsis',
-
-              }}
+            <button
+              key={topic.id}
+              type="button"
+              className={`space${isActive ? ' active' : ''}`}
+              style={{ left: x, top: y, '--space-color': topic.color }}
+              onClick={() => onSelect(topic.id)}
+              aria-current={isActive ? 'true' : undefined}
             >
-              {topic.name}
-            </div>
+              <span className="space-disc">{topic.id}</span>
+              <span className="space-label">{topic.name}</span>
+            </button>
           );
         })}
-        <Pawn 
-          coords={getPositionCoords(currentPos)} 
-          isHopping={currentHop === currentPos}
-        />
+
+        <Pawn left={pawn.x} top={pawn.y} hop={hop} />
+      </div>
+
+      <div className="board-tray">
+        <Dice disabled={busy} rollRef={rollRef} onRollStart={onRollStart} onResult={onRoll} label={text.roll} />
+        <div className="board-tray-text">
+          <strong>{text.roll}</strong>
+          <span>{text.hint}</span>
+        </div>
       </div>
     </div>
   );

@@ -1,31 +1,24 @@
-import React, { useEffect, useState } from 'react';
-import '../ComponentStyles/pawn.css';
-import pawnImage from '../res/pawn.png';
+import React from 'react';
 
-const Pawn = ({ coords, isHopping }) => {
-  const [animation, setAnimation] = useState('');
-  
-  useEffect(() => {
-    if (isHopping) {
-      setAnimation('hop 0.4s ease');
-    } else {
-      setAnimation('');
-    }
-  }, [isHopping]);
-
-  return (
-    <div
-      className="pawn"
-      style={{
-        left: coords.x,
-        top: coords.y,
-        transform: 'translate(-50%, -50%)',
-        transition: 'left 0.4s ease, top 0.4s ease',
-        animation: animation,
-        zIndex: 100,
-      }}
-    />
-  );
-};
+// `hop` changes on every step, which remounts the body and replays the hop animation
+const Pawn = ({ left, top, hop }) => (
+  <div className="pawn" style={{ left, top }}>
+    <div key={hop} className={`pawn-body${hop ? ' hop' : ''}`}>
+      <svg viewBox="0 0 40 54" aria-hidden="true">
+        <defs>
+          <linearGradient id="pawn-fill" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stopColor="#4a4950" />
+            <stop offset="100%" stopColor="#111114" />
+          </linearGradient>
+        </defs>
+        <ellipse cx="20" cy="48" rx="17" ry="5.5" fill="url(#pawn-fill)" />
+        <path d="M7 47 C8 38 14 34 15 26 L25 26 C26 34 32 38 33 47 Z" fill="url(#pawn-fill)" />
+        <rect x="11" y="22" width="18" height="5.5" rx="2.75" fill="url(#pawn-fill)" />
+        <circle cx="20" cy="13" r="10" fill="url(#pawn-fill)" />
+        <circle cx="16.5" cy="9.5" r="3" fill="#ffffff" opacity="0.25" />
+      </svg>
+    </div>
+  </div>
+);
 
 export default Pawn;
