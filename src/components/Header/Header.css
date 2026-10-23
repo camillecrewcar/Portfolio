@@ -60,6 +60,7 @@
   font: inherit;
   font-size: 0.85rem;
   font-weight: 600;
+  text-decoration: none;
   cursor: pointer;
   transition: border-color 0.2s ease, background-color 0.2s ease;
 }

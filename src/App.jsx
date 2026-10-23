@@ -43,6 +43,8 @@ const App = () => {
       <Header
         role={ui.role}
         contactLabel={ui.contact}
+        cvLabel={ui.cv}
+        cvUrl={ui.cvUrl}
         language={language}
         onLanguageChange={setLanguage}
         onContact={() => game.jumpTo(CONTACT_TOPIC)}
@@ -73,6 +75,7 @@ const App = () => {
           position={position}
           topics={topics}
           text={ui}
+          cvUrl={ui.cvUrl}
           photo={profilePhoto}
           busy={game.busy}
           onJump={game.jumpTo}

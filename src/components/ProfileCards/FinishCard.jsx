@@ -3,7 +3,7 @@ import { CONTACT } from '../../constants/contact';
 import './ProfileCards.css';
 
 // Shown when the pawn reaches FINISH: what I can bring to a team, plus ways to get in touch
-const FinishCard = ({ photo, text, busy, onPlayAgain }) => (
+const FinishCard = ({ photo, text, cvUrl, busy, onPlayAgain }) => (
   <article className="intro-card finish-card">
     <div className="intro-photo">
       <img src={photo} alt="Kamil Krukar" />
@@ -27,6 +27,7 @@ const FinishCard = ({ photo, text, busy, onPlayAgain }) => (
 
       <div className="finish-actions">
         <a className="intro-cta" href={`mailto:${CONTACT.email}`}>{text.email}</a>
+        <a className="finish-secondary" href={cvUrl} target="_blank" rel="noopener noreferrer">{text.cv}</a>
         <a className="finish-secondary" href={CONTACT.phoneHref}>{text.call}</a>
         <button type="button" className="finish-secondary" onClick={onPlayAgain} disabled={busy}>
           {text.again}

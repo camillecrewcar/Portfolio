@@ -1,5 +1,5 @@
 import images from './images';
-import { CONTACT } from '../constants/contact';
+import { CONTACT, CV_URL } from '../constants/contact';
 
 // English content: board topics and interface text
 
@@ -126,6 +126,7 @@ export const topics = [
       { title: 'Phone number', desc: CONTACT.phone, href: CONTACT.phoneHref, imageSrc: images.phone },
       { title: 'GitHub', desc: 'github.com/camillecrewcar', href: CONTACT.github, mark: 'GH', markColor: '#24292f' },
       { title: 'LinkedIn', desc: 'linkedin.com/in/kamil-krukar-60b16b238', href: CONTACT.linkedin, mark: 'in', markColor: '#0a66c2' },
+      { title: 'CV', desc: 'Download my CV (PDF)', href: CV_URL.en, mark: 'CV', markColor: '#1f4a3d' },
     ],
   },
   {
@@ -170,7 +171,10 @@ export const ui = {
     email: 'Email me',
     call: 'Call me',
     again: 'Play again',
+    cv: 'Download CV',
   },
+  cv: 'CV',
+  cvUrl: CV_URL.en,
   contact: 'Contact',
   topic: 'Topic',
   of: 'of',

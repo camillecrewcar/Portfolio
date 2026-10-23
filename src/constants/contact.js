@@ -6,3 +6,9 @@ export const CONTACT = {
   github: 'https://github.com/camillecrewcar',
   linkedin: 'https://www.linkedin.com/in/kamil-krukar-60b16b238',
 };
+
+// CV PDFs live in public/cv so they keep a stable address on the live site
+export const CV_URL = {
+  en: `${process.env.PUBLIC_URL}/cv/Kamil_Krukar_CV_EN.pdf`,
+  pl: `${process.env.PUBLIC_URL}/cv/Kamil_Krukar_CV_PL.pdf`,
+};

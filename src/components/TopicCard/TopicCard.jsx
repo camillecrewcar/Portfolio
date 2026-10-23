@@ -25,8 +25,8 @@ const TopicCard = ({ name, desc, imageSrc, href, mark, markColor, imageFit, imag
         <a
           className="topic-card-link"
           href={href}
-          // Profiles on other sites open in a new tab so the portfolio stays open
-          {...(href.startsWith('http') ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+          // Profiles on other sites and the CV open in a new tab so the portfolio stays open
+          {...(href.startsWith('http') || href.endsWith('.pdf') ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
         >
           {desc}
         </a>

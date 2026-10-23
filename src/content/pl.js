@@ -1,5 +1,5 @@
 import images from './images';
-import { CONTACT } from '../constants/contact';
+import { CONTACT, CV_URL } from '../constants/contact';
 
 // Polish content: board topics and interface text
 
@@ -126,6 +126,7 @@ export const topics = [
       { title: 'Numer telefonu', desc: CONTACT.phone, href: CONTACT.phoneHref, imageSrc: images.phone },
       { title: 'GitHub', desc: 'github.com/camillecrewcar', href: CONTACT.github, mark: 'GH', markColor: '#24292f' },
       { title: 'LinkedIn', desc: 'linkedin.com/in/kamil-krukar-60b16b238', href: CONTACT.linkedin, mark: 'in', markColor: '#0a66c2' },
+      { title: 'CV', desc: 'Pobierz moje CV (PDF)', href: CV_URL.pl, mark: 'CV', markColor: '#1f4a3d' },
     ],
   },
   {
@@ -170,7 +171,10 @@ export const ui = {
     email: 'Napisz do mnie',
     call: 'Zadzwoń',
     again: 'Zagraj jeszcze raz',
+    cv: 'Pobierz CV',
   },
+  cv: 'CV',
+  cvUrl: CV_URL.pl,
   contact: 'Kontakt',
   topic: 'Temat',
   of: 'z',

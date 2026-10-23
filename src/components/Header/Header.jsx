@@ -2,7 +2,7 @@ import React from 'react';
 import { LANGUAGES } from '../../constants/game';
 import './Header.css';
 
-const Header = ({ role, contactLabel, language, onLanguageChange, onContact }) => (
+const Header = ({ role, contactLabel, cvLabel, cvUrl, language, onLanguageChange, onContact }) => (
   <header className="site-header">
     <div className="brand">
       <span className="brand-mark" aria-hidden="true">KK</span>
@@ -12,6 +12,9 @@ const Header = ({ role, contactLabel, language, onLanguageChange, onContact }) =
       </span>
     </div>
     <nav className="header-actions">
+      <a className="header-link" href={cvUrl} target="_blank" rel="noopener noreferrer">
+        {cvLabel}
+      </a>
       <button type="button" className="header-link" onClick={onContact}>
         {contactLabel}
       </button>

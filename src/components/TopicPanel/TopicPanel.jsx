@@ -7,7 +7,7 @@ import { START, CONTACT_TOPIC } from '../../constants/game';
 import './TopicPanel.css';
 
 // Content next to the board: the START card, a topic's cards, or the FINISH card
-const TopicPanel = ({ sectionRef, language, position, topics, text, photo, busy, onJump, onStartGame }) => {
+const TopicPanel = ({ sectionRef, language, position, topics, text, cvUrl, photo, busy, onJump, onStartGame }) => {
   const total = topics.length;
   const finish = total + 1;
   const topic = topics.find((t) => t.id === position);
@@ -27,7 +27,7 @@ const TopicPanel = ({ sectionRef, language, position, topics, text, photo, busy,
     if (position === finish) {
       return (
         <div className="topic-scroll">
-          <FinishCard photo={photo} text={text.finishCard} busy={busy} onPlayAgain={() => onJump(START)} />
+          <FinishCard photo={photo} text={text.finishCard} cvUrl={cvUrl} busy={busy} onPlayAgain={() => onJump(START)} />
         </div>
       );
     }
