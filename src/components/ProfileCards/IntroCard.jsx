@@ -5,7 +5,8 @@ import './ProfileCards.css';
 const IntroCard = ({ photo, text, onStart, busy }) => (
   <article className="intro-card">
     <div className="intro-photo">
-      <img src={photo} alt="Kamil Krukar" />
+      {/* The first large image visitors see, so fetch it before anything else */}
+      <img src={photo} alt="Kamil Krukar" fetchPriority="high" />
     </div>
     <div className="intro-body">
       <p className="eyebrow">{text.role}</p>

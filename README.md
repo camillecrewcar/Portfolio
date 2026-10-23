@@ -49,7 +49,10 @@ src/
 - **Text and topics:** edit `src/content/en.js` and `src/content/pl.js`, keeping both languages in step.
   Each topic is `{ id, name, color, items }`; each item is `{ title, desc, imageSrc }`, with optional
   `href` (link), `imageFit: 'contain'` (show logos whole) and `imageScale` (zoom).
-- **Images:** add the file to `src/assets/images/` (kebab-case name), register it in
+- **Images:** save the file as WebP, at most about 960px on its longest side (cards are shown well
+  below that size), in `src/assets/images/` with a kebab-case name. Register it in
   `src/content/images.js`, then refer to it as `images.yourName`.
+- **Fonts:** Fraunces and Inter are self-hosted in `src/assets/fonts/` (see `src/styles/fonts.css`),
+  so the site makes no requests to Google Fonts.
 - **Contact details:** `src/constants/contact.js`.
 - **Profile photo:** `profilePhoto` in `src/content/images.js`.

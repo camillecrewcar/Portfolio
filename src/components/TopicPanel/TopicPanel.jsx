@@ -1,5 +1,5 @@
 import React from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { LazyMotion, domAnimation, m, AnimatePresence } from 'framer-motion';
 import TopicCard from '../TopicCard/TopicCard';
 import IntroCard from '../ProfileCards/IntroCard';
 import FinishCard from '../ProfileCards/FinishCard';
@@ -47,7 +47,7 @@ const TopicPanel = ({ sectionRef, language, position, topics, text, photo, busy,
         <div className="topic-scroll">
           <div className="topic-cards">
             {topic.items.map((item, index) => (
-              <motion.div
+              <m.div
                 key={index}
                 initial={{ opacity: 0, y: 14 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -64,7 +64,7 @@ const TopicPanel = ({ sectionRef, language, position, topics, text, photo, busy,
                   imageScale={item.imageScale}
                   compact={position === CONTACT_TOPIC}
                 />
-              </motion.div>
+              </m.div>
             ))}
           </div>
         </div>
@@ -85,18 +85,21 @@ const TopicPanel = ({ sectionRef, language, position, topics, text, photo, busy,
 
   return (
     <section className="topic-section" ref={sectionRef} aria-live="polite">
-      <AnimatePresence mode="wait">
-        <motion.div
-          key={`${language}-${position}`}
-          initial={{ opacity: 0, y: 14 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: -8 }}
-          transition={{ duration: 0.3, ease: 'easeOut' }}
-          className="topic-panel"
-        >
-          {renderContent()}
-        </motion.div>
-      </AnimatePresence>
+      {/* LazyMotion with `m` loads only the animation features used here, keeping the bundle small */}
+      <LazyMotion features={domAnimation} strict>
+        <AnimatePresence mode="wait">
+          <m.div
+            key={`${language}-${position}`}
+            initial={{ opacity: 0, y: 14 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -8 }}
+            transition={{ duration: 0.3, ease: 'easeOut' }}
+            className="topic-panel"
+          >
+            {renderContent()}
+          </m.div>
+        </AnimatePresence>
+      </LazyMotion>
     </section>
   );
 };
