@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/Portfolio/static/css/main.277a381d.css",
-    "main.js": "/Portfolio/static/js/main.3a1691c5.js",
+    "main.css": "/Portfolio/static/css/main.470f7929.css",
+    "main.js": "/Portfolio/static/js/main.d6f5d0b3.js",
     "static/js/453.1407b060.chunk.js": "/Portfolio/static/js/453.1407b060.chunk.js",
     "static/media/warsaw-university-of-technology.webp": "/Portfolio/static/media/warsaw-university-of-technology.41f55a65b483d6612462.webp",
     "static/media/backend.webp": "/Portfolio/static/media/backend.ce88ee178d46eb1b4af5.webp",
@@ -45,12 +45,12 @@
     "static/media/italian.webp": "/Portfolio/static/media/italian.9b39f4d78c601f54f941.webp",
     "static/media/polish.webp": "/Portfolio/static/media/polish.1c6d752770dd7f024db2.webp",
     "index.html": "/Portfolio/index.html",
-    "main.277a381d.css.map": "/Portfolio/static/css/main.277a381d.css.map",
-    "main.3a1691c5.js.map": "/Portfolio/static/js/main.3a1691c5.js.map",
+    "main.470f7929.css.map": "/Portfolio/static/css/main.470f7929.css.map",
+    "main.d6f5d0b3.js.map": "/Portfolio/static/js/main.d6f5d0b3.js.map",
     "453.1407b060.chunk.js.map": "/Portfolio/static/js/453.1407b060.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.277a381d.css",
-    "static/js/main.3a1691c5.js"
+    "static/css/main.470f7929.css",
+    "static/js/main.d6f5d0b3.js"
   ]
 }
